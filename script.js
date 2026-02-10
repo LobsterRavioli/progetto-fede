@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Tenta di far partire la musica al primo scroll della pagina
+    // Tenta di far partire la musica al primo scroll (desktop) o tocco (mobile)
     window.addEventListener('scroll', playMusic, { once: true });
+    document.body.addEventListener('touchstart', playMusic, { once: true });
 });
