@@ -9,7 +9,7 @@
 
 body {
     font-family: 'VT323', monospace;
-    background-color: #d1d1d1; /* Sfondo grigio neutro */
+    background-color: #ffe5f0; /* Sfondo rosa chiaro */
     color: #333;
     line-height: 1.4;
     margin: 0;
@@ -19,29 +19,29 @@ body {
     align-items: center;
     min-height: 100vh;
     
-    /* Sfondo a griglia per un look più tecnico */
+    /* Sfondo a griglia rosa per un look più tecnico ma in tema */
     background-image:
-        linear-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px);
+        linear-gradient(rgba(255, 105, 180, .2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 105, 180, .2) 1px, transparent 1px);
     background-size: 20px 20px;
-    background-color: #282c34;
+    background-color: #ffd1e8;
 }
 
 .pokedex-card {
     width: 100%;
     max-width: 850px;
-    background-color: #c0392b; /* Rosso Pokédex */
+    background-color: #ff69b4; /* Rosa shocking */
     border-radius: 15px 15px 15px 15px;
-    border: 5px solid #2c3e50;
+    border: 5px solid #c71585; /* Magenta scuro per contrasto */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset -5px -5px 0 rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
 }
 
 .pokedex-header {
-    background-color: #e74c3c; /* Rosso più chiaro per l'header */
+    background-color: #ff85c1; /* Rosa più chiaro per l'header */
     padding: 10px 20px;
-    border-bottom: 5px solid #2c3e50;
+    border-bottom: 5px solid #c71585; /* Magenta scuro */
     border-radius: 10px 10px 0 0;
     position: relative; /* Aggiunto per posizionare il bottone */
 }
@@ -52,7 +52,7 @@ body {
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: #c0392b; /* Stesso rosso del corpo */
+    background-color: #ff69b4; /* Stesso rosa del corpo */
     border: 3px solid white;
     border-radius: 50%;
     cursor: pointer;
@@ -66,7 +66,7 @@ body {
 }
 
 #music-toggle-btn:hover {
-    background-color: #e74c3c; /* Si illumina al passaggio del mouse */
+    background-color: #ff85c1; /* Si illumina al passaggio del mouse */
 }
 
 #music-toggle-btn:active {
@@ -81,7 +81,7 @@ body {
 }
 
 .header-top .led-blue { width: 40px; height: 40px; background-color: #3498db; border-radius: 50%; border: 3px solid white; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3); }
-.header-top .led-red { width: 20px; height: 20px; background-color: #e74c3c; border-radius: 50%; border: 2px solid white; }
+.header-top .led-red { width: 20px; height: 20px; background-color: #ff85c1; border-radius: 50%; border: 2px solid white; }
 .header-top .led-yellow { width: 20px; height: 20px; background-color: #f1c40f; border-radius: 50%; border: 2px solid white; }
 .header-top .led-green { width: 20px; height: 20px; background-color: #2ecc71; border-radius: 50%; border: 2px solid white; }
 
@@ -89,7 +89,7 @@ body {
 .pokedex-header h1 {
     font-size: 2.5em;
     color: white;
-    text-shadow: 2px 2px #2c3e50;
+    text-shadow: 2px 2px #c71585;
     margin: 0;
     text-align: center; /* Centrato */
     width: 100%; /* Occupa tutta la larghezza per centrarsi bene */
@@ -233,7 +233,7 @@ body {
 
 .image-frame {
     background-color: #fff;
-    border: 10px solid #2c3e50;
+    border: 10px solid #c71585;
     border-radius: 5px;
     padding: 10px;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
@@ -307,7 +307,7 @@ body {
 .pokedex-entry p { margin: 0 0 10px 0; }
 .pokedex-entry .rare-info {
     font-style: italic;
-    color: #c0392b;
+    color: #ff69b4;
 }
 
 .pokemon-stats {
