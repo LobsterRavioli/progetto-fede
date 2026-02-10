@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Tenta di far partire la musica alla prima interazione dell'utente
-    document.body.addEventListener('click', playMusic, { once: true });
-    document.body.addEventListener('touchstart', playMusic, { once: true });
+    // Tenta di far partire la musica al primo scroll della pagina
+    window.addEventListener('scroll', playMusic, { once: true });
 });
