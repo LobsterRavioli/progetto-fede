@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pokédex: Federica</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Aggiungo il font stile "pixel" per l'estetica Pokédex -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="blackpink-jump-mv_2z7XZTGX.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'elemento audio.
+    </audio>
+
+    <div class="pokedex-card">
+        <header class="pokedex-header">
+            <div class="header-top">
+                <div class="led-blue"></div>
+                <div class="led-red"></div>
+                <div class="led-yellow"></div>
+                <div class="led-green"></div>
+            </div>
+            <h1>FEDERICA — №001</h1>
+        </header>
+
+        <main class="pokemon-content">
+            <div class="pokemon-image-container">
+                <div class="image-frame">
+                    <img src="foto_buffa.png" alt="Foto di Federica">
+                </div>
+                <div class="species-tag">Specie: Pokémon Dolcezza</div>
+            </div>
+
+            <div class="pokemon-data-container">
+                <section class="pokemon-info">
+                    <div class="info-grid">
+                        <div class="info-item"><strong>TIPO:</strong><div><span class="type-badge type-folletto">FOLLETTO</span><span class="type-badge type-normale">NORMALE</span></div></div>
+                        <div class="info-item"><strong>ABILITÀ:</strong><div>VOCE SOAVE</div></div>
+                        <div class="info-item"><strong>ALTEZZA:</strong><div>1,65 m</div></div>
+                        <div class="info-item"><strong>PESO:</strong><div>55,0 kg</div></div>
+                    </div>
+                </section>
+
+                <section class="pokedex-entry">
+                    <p>Pokémon estremamente raro, avvistato principalmente in ambienti confortevoli come il divano. È noto per la sua natura gentile e un umorismo che può disarmare anche l'avversario più serio. La sua voce ha un effetto calmante, capace di indurre sonnolenza profonda in chi ascolta le sue chiamate serali.</p>
+                    <p class="rare-info"><i>Analisi scientifica: Nonostante le apparenze, è la persona migliore che si possa conoscere. Questa informazione è classificata.</i> ❤️</p>
+                </section>
+            </div>
+
+            <section class="pokemon-stats">
+                <h2>STATISTICHE DI BASE</h2>
+                <div class="stat-item"><label>PS</label><div class="barra-container"><div class="barra" style="width: 99%;"></div></div></div>
+                <div class="stat-item"><label>ATTACCO</label><div class="barra-container"><div class="barra" style="width: 70%;"></div></div></div>
+                <div class="stat-item"><label>DIFESA</label><div class="barra-container"><div class="barra" style="width: 80%;"></div></div></div>
+                <div class="stat-item"><label>ATT. SP.</label><div class="barra-container"><div class="barra" style="width: 100%;"></div></div></div>
+                <div class="stat-item"><label>DIF. SP.</label><div class="barra-container"><div class="barra" style="width: 101%;"></div></div></div>
+                <div class="stat-item"><label>VELOCITÀ</label><div class="barra-container"><div class="barra" style="width: 60%;"></div></div></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Elementi decorativi e script -->
+    <ul class="floating-elements"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    <script src="script.js"></script>
+</body>
+</html>
