@@ -43,6 +43,34 @@ body {
     padding: 10px 20px;
     border-bottom: 5px solid #2c3e50;
     border-radius: 10px 10px 0 0;
+    position: relative; /* Aggiunto per posizionare il bottone */
+}
+
+#music-toggle-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #c0392b; /* Stesso rosso del corpo */
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#music-toggle-btn:hover {
+    background-color: #e74c3c; /* Si illumina al passaggio del mouse */
+}
+
+#music-toggle-btn:active {
+    transform: scale(0.95);
 }
 
 .header-top {
@@ -57,13 +85,16 @@ body {
 .header-top .led-yellow { width: 20px; height: 20px; background-color: #f1c40f; border-radius: 50%; border: 2px solid white; }
 .header-top .led-green { width: 20px; height: 20px; background-color: #2ecc71; border-radius: 50%; border: 2px solid white; }
 
+
 .pokedex-header h1 {
     font-size: 2.5em;
     color: white;
     text-shadow: 2px 2px #2c3e50;
     margin: 0;
-    text-align: center;
+    text-align: center; /* Centrato */
+    width: 100%; /* Occupa tutta la larghezza per centrarsi bene */
 }
+
 
 .pokemon-content {
     background-color: #f2f2f2;
@@ -81,6 +112,7 @@ body {
 }
 
 /* --- Stili per Mobile --- */
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -91,9 +123,18 @@ body {
         padding-bottom: env(safe-area-inset-bottom, 10px);
     }
 
+    #music-toggle-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        top: 10px;
+        right: 15px;
+    }
+
     .pokedex-header h1 {
         font-size: 2em;
     }
+
 
     .pokemon-content {
         grid-template-columns: 1fr;
