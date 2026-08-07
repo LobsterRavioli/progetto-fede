@@ -20,8 +20,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const FLOWERS = ['🌸', '🌷', '🌼', '🌻', '🌺', '💮', '🌹'];
 
-  // ---------- Il bottone "No" scappa ----------
+  // ---------- Il bottone "No" scappa (e combina un po' di casino) ----------
   let dodgeCount = 0;
+  let yesGrowth = 1;
+  let lastPhrase = null;
+
+  const NO_PHRASES = [
+    'No', 'Nooo!', 'Manco per sogno', 'Ci pensi?', 'Sicura?',
+    'Ultima chance', 'Eh no', 'Riprova', 'Nope', '🙈',
+    'Non se ne parla', 'Dai su', 'Neanche a pagarmi', 'Ahia'
+  ];
+
+  function pickNoPhrase() {
+    let phrase;
+    do {
+      phrase = NO_PHRASES[Math.floor(Math.random() * NO_PHRASES.length)];
+    } while (phrase === lastPhrase);
+    lastPhrase = phrase;
+    return phrase;
+  }
+
+  function growYesButton() {
+    yesGrowth = Math.min(1.35, yesGrowth + 0.025);
+    yesBtn.style.transform = `scale(${yesGrowth.toFixed(3)})`;
+  }
+
+  function spawnPuff(x, y) {
+    if (x === undefined || y === undefined) return;
+    const symbols = ['💨', '✨', '😂', '🙈', '💫'];
+    const count = 5;
+    for (let i = 0; i < count; i++) {
+      const puff = document.createElement('span');
+      puff.className = 'puff';
+      puff.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      const angle = (360 / count) * i + (Math.random() * 40 - 20);
+      const dist = 26 + Math.random() * 30;
+      const rad = (angle * Math.PI) / 180;
+      puff.style.left = `${x}px`;
+      puff.style.top = `${y}px`;
+      puff.style.setProperty('--pdx', `${Math.cos(rad) * dist}px`);
+      puff.style.setProperty('--pdy', `${Math.sin(rad) * dist}px`);
+      document.body.appendChild(puff);
+      setTimeout(() => puff.remove(), 550);
+    }
+  }
 
   function getViewportBounds() {
     // Su Safari iOS window.innerHeight non tiene conto della barra di
@@ -36,12 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function dodgeNoButton(clientX, clientY) {
     if (prefersReducedMotion) return;
 
-    const btnRect = noBtn.getBoundingClientRect();
+    const originRect = noBtn.getBoundingClientRect();
+    const originX = clientX !== undefined ? clientX : originRect.left + originRect.width / 2;
+    const originY = clientY !== undefined ? clientY : originRect.top + originRect.height / 2;
 
-    if (!noBtn.classList.contains('is-fleeing')) {
-      noBtn.classList.add('is-fleeing');
-      noBtn.style.width = `${btnRect.width}px`;
-    }
+    noBtn.classList.add('is-fleeing');
+    // il testo cambia prima di misurare il bottone, cosi' la posizione
+    // tiene conto della larghezza reale della nuova frase
+    noBtn.textContent = pickNoPhrase();
+    const btnRect = noBtn.getBoundingClientRect();
 
     const margin = 16;
     const bottomSafeMargin = 64; // tiene il bottone lontano dalla barra di Safari
@@ -71,6 +116,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     noBtn.style.left = `${Math.max(minLeft, newLeft)}px`;
     noBtn.style.top = `${Math.max(minTop, newTop)}px`;
+
+    // un po' di casino: rotazione/dimensione casuale con un piccolo "rimbalzo"
+    // all'atterraggio, uno sbuffo di emoji, e il bottone "Sì" che cresce
+    // un pochino ogni volta
+    const rotation = (Math.random() * 50 - 25).toFixed(1);
+    const scale = (0.9 + Math.random() * 0.35).toFixed(2);
+    noBtn.style.transform = `rotate(${rotation}deg) scale(0.7)`;
+    requestAnimationFrame(() => {
+      noBtn.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+    });
+
+    spawnPuff(originX, originY);
+    growYesButton();
 
     dodgeCount += 1;
     updateHint();
