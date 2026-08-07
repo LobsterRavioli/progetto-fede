@@ -3,11 +3,13 @@
 // ==========================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  const coverSection = document.getElementById('cover-section');
+  const openBtn = document.getElementById('open-btn');
   const noBtn = document.getElementById('no-btn');
   const yesBtn = document.getElementById('yes-btn');
   const choiceBox = document.querySelector('.choice-box');
   const hintText = document.getElementById('hint-text');
-  const introSection = document.querySelector('.intro');
+  const introSection = document.getElementById('intro-section');
   const revealSection = document.getElementById('reveal-section');
   const flowerBurst = document.getElementById('flower-burst');
   const replayBtn = document.getElementById('replay-btn');
@@ -144,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => petal.remove(), fallDuration * 1000 + 200);
   }
 
-  // qualche petalo iniziale, discreto, mentre si legge la pagina
-  startPetalFall(6);
+  // qualche petalo iniziale, discreto, mentre si legge la copertina
+  startPetalFall(4);
 
   // ---------- Musica di sottofondo ----------
   let musicReady = true;
@@ -165,5 +167,20 @@ document.addEventListener('DOMContentLoaded', () => {
       music.pause();
       musicBtn.textContent = '🔇';
     }
+  });
+
+  // ---------- Bottone "Apri" (copertina) ----------
+  openBtn.addEventListener('click', () => {
+    // il click è un gesto utente diretto: qui l'autoplay con audio è consentito
+    if (musicReady) {
+      music.play().then(() => { musicBtn.textContent = '🔊'; })
+                   .catch(() => { /* l'utente potrà comunque avviarla dal bottone musica */ });
+    }
+
+    coverSection.classList.add('is-hidden');
+    coverSection.setAttribute('aria-hidden', 'true');
+    introSection.classList.add('is-visible');
+    introSection.setAttribute('aria-hidden', 'false');
+    startPetalFall(10);
   });
 });
