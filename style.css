@@ -161,6 +161,23 @@ button:focus-visible{
   50%{ transform: translateY(-10px) rotate(4deg); }
 }
 
+/* ---------- Riquadri per le gif (embed Giphy) ---------- */
+.gif-frame{
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 20px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 10px 24px var(--shadow);
+  background: #f2e9e6;
+}
+.gif-frame-cover{ max-width: 220px; }
+.gif-frame-small{ max-width: 150px; margin-top: 6px; margin-bottom: 4px; }
+.gif-frame iframe{ display: block; border: 0; }
+
 .cover-title{
   font-family: 'Baloo 2', cursive;
   font-size: clamp(1.7rem, 5.5vw, 2.4rem);
