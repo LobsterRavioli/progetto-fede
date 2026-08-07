@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const openBtn = document.getElementById('open-btn');
   const noBtn = document.getElementById('no-btn');
   const yesBtn = document.getElementById('yes-btn');
-  const choiceBox = document.querySelector('.choice-box');
   const hintText = document.getElementById('hint-text');
   const introSection = document.getElementById('intro-section');
   const revealSection = document.getElementById('reveal-section');
@@ -24,10 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Il bottone "No" scappa ----------
   let dodgeCount = 0;
 
+  function getViewportBounds() {
+    // Su Safari iOS window.innerHeight non tiene conto della barra di
+    // navigazione in basso: visualViewport riflette l'area davvero visibile.
+    const vv = window.visualViewport;
+    if (vv) {
+      return { width: vv.width, height: vv.height, offsetLeft: vv.offsetLeft, offsetTop: vv.offsetTop };
+    }
+    return { width: window.innerWidth, height: window.innerHeight, offsetLeft: 0, offsetTop: 0 };
+  }
+
   function dodgeNoButton(clientX, clientY) {
     if (prefersReducedMotion) return;
 
-    const boxRect = choiceBox.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
 
     if (!noBtn.classList.contains('is-fleeing')) {
@@ -36,29 +44,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const margin = 16;
-    const maxLeft = window.innerWidth - btnRect.width - margin;
-    const maxTop = window.innerHeight - btnRect.height - margin;
+    const bottomSafeMargin = 64; // tiene il bottone lontano dalla barra di Safari
+    const viewport = getViewportBounds();
+    const minLeft = viewport.offsetLeft + margin;
+    const minTop = viewport.offsetTop + margin;
+    const maxLeft = viewport.offsetLeft + viewport.width - btnRect.width - margin;
+    const maxTop = viewport.offsetTop + viewport.height - btnRect.height - bottomSafeMargin;
 
-    let newLeft = Math.random() * (maxLeft - margin) + margin;
-    let newTop = Math.random() * (maxTop - margin) + margin;
+    let newLeft = minLeft + Math.random() * Math.max(0, maxLeft - minLeft);
+    let newTop = minTop + Math.random() * Math.max(0, maxTop - minTop);
 
     // evita che ricompaia troppo vicino al punto di contatto
     if (clientX !== undefined) {
       const dx = newLeft - clientX;
       const dy = newTop - clientY;
       if (Math.sqrt(dx * dx + dy * dy) < 140) {
-        newLeft = (newLeft + window.innerWidth / 2) % maxLeft;
+        newLeft = minLeft + ((newLeft - minLeft + (maxLeft - minLeft) / 2) % Math.max(1, maxLeft - minLeft));
       }
     }
 
     // evita l'angolo in alto a destra, occupato dal bottone della musica
     const exclusionSize = 80;
-    if (newLeft > window.innerWidth - exclusionSize && newTop < exclusionSize) {
-      newTop = exclusionSize + margin;
+    if (newLeft > viewport.offsetLeft + viewport.width - exclusionSize && newTop < viewport.offsetTop + exclusionSize) {
+      newTop = viewport.offsetTop + exclusionSize + margin;
     }
 
-    noBtn.style.left = `${Math.max(margin, newLeft)}px`;
-    noBtn.style.top = `${Math.max(margin, newTop)}px`;
+    noBtn.style.left = `${Math.max(minLeft, newLeft)}px`;
+    noBtn.style.top = `${Math.max(minTop, newTop)}px`;
 
     dodgeCount += 1;
     updateHint();
