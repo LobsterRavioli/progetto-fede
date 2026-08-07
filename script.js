@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const petalLayer = document.getElementById('petal-layer');
   const musicBtn = document.getElementById('music-toggle-btn');
   const music = document.getElementById('background-music');
+  const cheerSound = document.getElementById('cheer-sound');
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -159,6 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Bottone "Sì" ----------
   yesBtn.addEventListener('click', () => {
+    cheerSound.currentTime = 0;
+    cheerSound.play().catch(() => { /* se il browser blocca, pazienza */ });
+
     introSection.style.display = 'none';
     revealSection.classList.add('is-visible');
     revealSection.setAttribute('aria-hidden', 'false');
